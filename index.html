@@ -52,7 +52,7 @@
             <div class="bg-white p-4 w-full">
                 <h2 class="text-xl font-bold mb-4">Note taking Space</h2>
                 <!--Text editor-->
-                <div class="flex flex-row items-center justify-between p-2 bg-gray-300 rounded">
+                <div class="flex flex-row items-center justify-between p-2 bg-gray-300 rounded-t-lg">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M5 6C5 4.58579 5 3.87868 5.43934 3.43934C5.87868 3 6.58579 3 8 3H12.5789C15.0206 3 17 5.01472 17 7.5C17 9.98528 15.0206 12 12.5789 12H5V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -133,21 +133,10 @@
                     </button>
                 </div>
             </div>
+
+            <!--NoteEditor-->
+            <textarea id="noteEditor" placeholder="Start typing your notes here..." class="w-full h-64 resize-none p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
               
-            <!-- <div class="bg-white border border-gray-300 rounded-lg shadow-sm p-4">
-                <textarea 
-                  id="noteEditor" 
-                  class="w-full h-64 resize-none p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  placeholder="Start typing your notes here..."></textarea>
-                  
-                <div class="flex justify-end mt-2">
-                  <button 
-                    id="saveNote" 
-                    class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded">
-                    Save
-                  </button>
-                </div>
-            </div> -->
         </div>
 
         <div class="tab-content" id="AI" hidden>
