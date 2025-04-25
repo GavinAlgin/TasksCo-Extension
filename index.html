@@ -27,21 +27,20 @@
         </div>
 
         <!--To-do-List-body-->
-        <div class="tab-content flex-grow" id="tasks">
-            <div class="container mx-auto mt-6 p-4 bg-white rounded-md shadow-md flex flex-col h-full max-w-md">
-                <h3 class="text-xl font-semibold mb-4">Your Tasks</h3>
-                <ul id="task-list" class="space-y-2 flex-1 overflow-auto"></ul>
-    
-                <div class="sticky bottom-0 pt-4 bg-white">
-                    <div class="flex">
-                        <input id="new-task" type="text" placeholder="Add a new task" 
-                            class="form-input w-full p-2 border border-gray-300 rounded-l-md" />
-                        <button id="add-task" 
-                            class="bg-blue-600 text-white px-4 py-2 rounded-r-md hover:bg-blue-700">
-                            Add
-                        </button>
-                    </div>
-                </div>
+        <div class="bg-white rounded-md shadow-md p-6 w-full max-w-md flex flex-col h-[90vh]">
+            <h2 class="text-2xl font-bold mb-4">📝 Your Tasks</h2>
+            
+            <!-- Task List -->
+            <ul id="task-list" class="flex-1 overflow-auto space-y-2 mb-4"></ul>
+        
+            <!-- Input & Add Button -->
+            <div class="sticky bottom-0 pt-2 bg-white">
+              <div class="flex">
+                <input id="new-task" type="text" placeholder="Add a new task"
+                       class="flex-1 p-2 border border-gray-300 rounded-l-md" />
+                <button id="add-task"
+                        class="bg-blue-600 text-white px-4 rounded-r-md hover:bg-blue-700">Add</button>
+              </div>
             </div>
         </div>
 
