@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tasks.splice(index, 1);
         saveTasks();
         renderTasks();
-      }, 4000);
+      }, 3000);
     });
 
     taskList.appendChild(li);
