@@ -26,3 +26,90 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const taskList = document.getElementById('task-list');
+    const addTaskBtn = document.getElementById('add-task');
+    const newTaskInput = document.getElementById('new-task');
+
+    function createTaskElement(taskText) {
+        const li = document.createElement('li');
+        li.className = 'bg-gray-100 p-3 rounded-md flex items-center justify-between space-x-2 draggable';
+        li.setAttribute('draggable', 'true');
+
+        const dragIcon = document.createElement('span');
+        dragIcon.innerHTML = '☰'; // draggable icon
+        dragIcon.className = 'cursor-move text-gray-400 pr-2';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'form-checkbox h-5 w-5 text-blue-600 rounded-full';
+
+        const span = document.createElement('span');
+        span.className = 'ml-2 flex-1';
+        span.textContent = taskText;
+
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                li.remove();
+            }
+        });
+
+        const contentWrap = document.createElement('div');
+        contentWrap.className = 'flex items-center w-full';
+        contentWrap.appendChild(dragIcon);
+        contentWrap.appendChild(checkbox);
+        contentWrap.appendChild(span);
+
+        li.appendChild(contentWrap);
+        taskList.appendChild(li);
+    }
+
+    addTaskBtn.addEventListener('click', () => {
+        const taskText = newTaskInput.value.trim();
+        if (taskText) {
+            createTaskElement(taskText);
+            newTaskInput.value = '';
+            newTaskInput.focus();
+        }
+    });
+
+    newTaskInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addTaskBtn.click();
+        }
+    });
+
+    // Drag and drop logic
+    let dragged;
+
+    taskList.addEventListener('dragstart', (e) => {
+        dragged = e.target;
+        e.target.style.opacity = 0.5;
+    });
+
+    taskList.addEventListener('dragend', (e) => {
+        e.target.style.opacity = '';
+    });
+
+    taskList.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(taskList, e.clientY);
+        if (afterElement == null) {
+            taskList.appendChild(dragged);
+        } else {
+            taskList.insertBefore(dragged, afterElement);
+        }
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            return offset < 0 && offset > closest.offset
+                ? { offset: offset, element: child }
+                : closest;
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+});
