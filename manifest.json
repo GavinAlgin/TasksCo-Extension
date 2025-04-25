@@ -1,0 +1,9 @@
+{
+    "manifest_version": 3,
+    "name": "To-Do",
+    "version": "1.0",
+    "description": "Welcome to Prowebext! An productive and intelligent extension tool for developers.",
+    "action": {
+        "default_popup": "index.html"
+    }
+}
