@@ -130,3 +130,38 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   renderTasks(); // Initial render
+
+  //dropdown menu for the font selector
+  const menuButton = document.getElementById('menu-button');
+  const menuItems = document.getElementById('menu-items');
+  const fontOptionsContainer = document.getElementById('font-options');
+  const fontLabel = document.getElementById('font-label');
+
+  const fonts = ['Arial', 'Helvetica', 'Times New Roman', 'Courier New', 'Verdana']; // Add your desired fonts
+
+  fonts.forEach(font => {
+      const option = document.createElement('a');
+      option.href = '#';
+      option.classList.add('block', 'px-4', 'py-2', 'text-sm', 'text-gray-700', 'hover:bg-gray-100');
+      option.textContent = font;
+      option.setAttribute('role', 'menuitem');
+      option.addEventListener('click', (event) => {
+          event.preventDefault();
+          fontLabel.textContent = font;
+          menuItems.classList.add('hidden');
+      });
+      fontOptionsContainer.appendChild(option);
+  });
+
+  menuButton.addEventListener('click', () => {
+      menuItems.classList.toggle('hidden');
+      menuButton.setAttribute('aria-expanded', !menuItems.classList.contains('hidden'));
+  });
+
+  // Close the dropdown when clicking outside
+  document.addEventListener('click', (event) => {
+      if (!menuButton.contains(event.target) && !menuItems.contains(event.target)) {
+          menuItems.classList.add('hidden');
+          menuButton.setAttribute('aria-expanded', false);
+      }
+  });
