@@ -53,19 +53,19 @@
                 <h2 class="text-xl font-bold mb-4">Note taking Space</h2>
                 <!--Text editor-->
                 <div class="flex flex-row items-center justify-between p-2 bg-gray-300 rounded-t-lg">
-                    <button>
+                    <button id="bold" class="option-button format">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M5 6C5 4.58579 5 3.87868 5.43934 3.43934C5.87868 3 6.58579 3 8 3H12.5789C15.0206 3 17 5.01472 17 7.5C17 9.98528 15.0206 12 12.5789 12H5V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                             <path d="M12.4286 12H13.6667C16.0599 12 18 14.0147 18 16.5C18 18.9853 16.0599 21 13.6667 21H8C6.58579 21 5.87868 21 5.43934 20.5607C5 20.1213 5 19.4142 5 18V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
-                    <button>
+                    <button id="underline" class="option-button format">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path d="M5.5 3V11.5C5.5 15.0899 8.41015 18 12 18C15.5899 18 18.5 15.0899 18.5 11.5V3" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M3 21H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
                         </svg>
                     </button>
-                    <button>
+                    <button id="italic" class="option-button format">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path d="M12 4H19" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
                             <path d="M8 20L16 4" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path>
@@ -83,7 +83,7 @@
                             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
                         </svg>
                     </button>
-                    <button>
+                    <button id="justifyLeft" class="option-button align">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path d="M3 3H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M3 9H11" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -91,7 +91,7 @@
                             <path d="M3 21H11" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </button>
-                    <button>
+                    <button id="justifyCenter" class="option-button align">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path d="M3 3H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M8 9H16" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -99,7 +99,7 @@
                             <path d="M8 21H16" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </button>
-                    <button>
+                    <button id="justifyRight" class="option-button align">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path d="M3 3H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M13 9H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -107,7 +107,7 @@
                             <path d="M13 21H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
                     </button>
-                    <button>
+                    <button id="insertOrderedList" class="option-button">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path d="M15 4H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             <path d="M15 15H21" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -117,7 +117,7 @@
                             <circle cx="6.5" cy="17.5" r="3.5" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
                         </svg>
                     </button>
-                    <button>
+                    <button >
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#000000" fill="none">
                             <path d="M7.99805 16H11.998M7.99805 11H15.998" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                             <path d="M7.5 3.5C5.9442 3.54667 5.01661 3.71984 4.37477 4.36227C3.49609 5.24177 3.49609 6.6573 3.49609 9.48836L3.49609 15.9944C3.49609 18.8255 3.49609 20.241 4.37477 21.1205C5.25345 22 6.66767 22 9.49609 22L14.4961 22C17.3245 22 18.7387 22 19.6174 21.1205C20.4961 20.241 20.4961 18.8255 20.4961 15.9944V9.48836C20.4961 6.6573 20.4961 5.24177 19.6174 4.36228C18.9756 3.71984 18.048 3.54667 16.4922 3.5" stroke="currentColor" stroke-width="1.5" />
@@ -136,11 +136,49 @@
 
             <!--NoteEditor-->
             <textarea id="noteEditor" placeholder="Start typing your notes here..." class="w-full h-64 resize-none p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+
+            <!-- saving btn -->
+            <div class="p-2 flex flex-row gap-4">
+                <button id="publishBtn" class="p-3 bg-black font-semibold rounded-md text-white hover:bg-white hover:border hover:text-black">Publish</button>
+                
+                <button type="reset" id="resetBtn">
+                    <!-- SVG icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" color="#000000" fill="none">
+                        <path d="M4 12.0005L4 14.5446C4 17.7896 4 19.4122 4.88607 20.5111C5.06508 20.7331 5.26731 20.9354 5.48933 21.1144C6.58831 22.0005 8.21082 22.0005 11.4558 22.0005C12.1614 22.0005 12.5141 22.0005 12.8372 21.8865C12.9044 21.8627 12.9702 21.8355 13.0345 21.8047C13.3436 21.6569 13.593 21.4075 14.0919 20.9086L18.8284 16.172C19.4065 15.594 19.6955 15.3049 19.8478 14.9374C20 14.5699 20 14.1611 20 13.3436V10.0005C20 6.22922 20 4.34361 18.8284 3.17203C17.7693 2.11287 16.1265 2.01125 13.0345 2.0015M13 21.5005V21.0005C13 18.172 13 16.7578 13.8787 15.8791C14.7574 15.0005 16.1716 15.0005 19 15.0005H19.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M12 5.99954H4M8 1.99954V9.99954" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            
               
         </div>
 
         <div class="tab-content" id="AI" hidden>
-            <h2>Generative AI</h2>
+            <div class="bg-gradient-to-br from-slate-50 to-slate-200 min-h-screen flex items-center justify-center">
+                <h2 class="text-xl font-bold mb-4">Generative AI</h2>
+                <!--Output Text Area-->
+                <div class="p-6 bg-gray-100"></div>
+                <br/>
+                <!--AI Input Panel-->
+                <div class="flex flex-col justify-between">
+                    <div class="bg-black p-4 rounded-lg">
+                        <h2 class="text-sm flex flex-row gap-2 text-white font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#ffff" fill="none">
+                                <path d="M3 12C7.5 12 12 7.5 12 3C12 7.5 16.5 12 21 12C16.5 12 12 16.5 12 21C12 16.5 7.5 12 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                                <path d="M2 19.5C2.83333 19.5 4.5 17.8333 4.5 17C4.5 17.8333 6.16667 19.5 7 19.5C6.16667 19.5 4.5 21.1667 4.5 22C4.5 21.1667 2.83333 19.5 2 19.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                                <path d="M16 5C17 5 19 3 19 2C19 3 21 5 22 5C21 5 19 7 19 8C19 7 17 5 16 5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                            </svg>
+                            AI Tools
+                        </h2>
+                        <!--Inputs-->
+                        <div class="bg-gray-100 rounded-md w-95">
+                            <input type="text">
+                            Powered by AI. Paste a link or ask anything ✨
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 

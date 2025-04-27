@@ -1,9 +1,22 @@
 {
     "manifest_version": 3,
-    "name": "To-Do",
+    "name": "TaskCo Extension",
     "version": "1.0",
     "description": "Welcome to Prowebext! An productive and intelligent extension tool for developers.",
+    "permissions": [
+        "storage"
+    ],
     "action": {
-        "default_popup": "index.html"
-    }
+        "default_popup": "index.html",
+        "default_icon": {
+            "16": "IconLogo.png"
+        }
+    },
+    "background":{
+        "service_worker": "db.js"
+    },
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ]
 }
