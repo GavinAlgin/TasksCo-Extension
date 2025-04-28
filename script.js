@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTasks(); // Initial render
 
 
-  //texteditor functionality
+//texteditor functionality
 let optionsButtons = document.querySelectorAll(".option-button");
 let advancedOptionButton = document.querySelectorAll(".adv-option-button");
 let fontName = document.getElementById("fontName");
@@ -251,50 +251,56 @@ const highlighterRemover = (className) => {
 
 window.onload = initializer();
 
-//saving text & toast notifications
+// IndexedDB setup using Dexie
+const db = new Dexie('NotesDB');
+db.version(1).stores({
+  notes: 'id,text'
+});
+
 const noteEditor = document.getElementById('noteEditor');
 const publishBtn = document.getElementById('publishBtn');
 const resetBtn = document.getElementById('resetBtn');
 
-// Load saved note on page load
-window.addEventListener('DOMContentLoaded', () => {
-  const savedNote = localStorage.getItem('noteText');
-  if (savedNote) {
-    noteEditor.value = savedNote;
+// Load saved note from IndexedDB
+window.addEventListener('DOMContentLoaded', async () => {
+  const note = await db.notes.get(1);
+  if (note) {
+    noteEditor.value = note.text;
   }
 });
 
-// Debounced auto-save
+// Debounced auto-save to IndexedDB
 let debounceTimer;
 noteEditor.addEventListener('input', () => {
   clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(() => {
-    localStorage.setItem('noteText', noteEditor.value);
-  }, 300); // 300ms debounce
+  debounceTimer = setTimeout(async () => {
+    await db.notes.put({ id: 1, text: noteEditor.value });
+  }, 300);
 });
 
-// Publish button click: confirm save and show toast
-publishBtn.addEventListener('click', () => {
-  localStorage.setItem('noteText', noteEditor.value);
-  Window.alert('Note saved to local storage!');
+// Publish button: confirm save and show toast
+publishBtn.addEventListener('click', async () => {
+  await db.notes.put({ id: 1, text: noteEditor.value });
+  showToast('✅ Note saved successfully!');
 });
 
-// Reset button click: clear storage and textarea
-resetBtn.addEventListener('click', (e) => {
+// Reset button: clear notes and notify
+resetBtn.addEventListener('click', async (e) => {
   e.preventDefault();
   noteEditor.value = '';
-  localStorage.removeItem('noteText');
-  Window.alert('Note cleared.');
+  await db.notes.delete(1);
+  showToast('🗑 Note cleared.');
 });
 
-// Toast function
+// Toast Notification Function
 function showToast(message) {
   const toast = document.createElement('div');
   toast.textContent = message;
-  toast.className = 'fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded shadow-lg animate-fade-in-out';
+  toast.className = 'fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0';
   document.body.appendChild(toast);
-
+  setTimeout(() => (toast.style.opacity = '1'), 50);
   setTimeout(() => {
-    toast.remove();
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 500);
   }, 3000);
 }

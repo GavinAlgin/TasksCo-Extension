@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Dexie.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/dexie@3/dist/dexie.min.js"></script>
 </head>
 <body class="bg-gray-100 text-gray-800 font-sora">
     <div id="app" class="w-96 mx-auto p-4 bg-white shadow rounded">
@@ -149,35 +151,20 @@
                     </svg>
                 </button>
             </div>
-            
-              
         </div>
 
         <div class="tab-content" id="AI" hidden>
-            <div class="bg-gradient-to-br from-slate-50 to-slate-200 min-h-screen flex items-center justify-center">
-                <h2 class="text-xl font-bold mb-4">Generative AI</h2>
-                <!--Output Text Area-->
-                <div class="p-6 bg-gray-100"></div>
-                <br/>
-                <!--AI Input Panel-->
-                <div class="flex flex-col justify-between">
-                    <div class="bg-black p-4 rounded-lg">
-                        <h2 class="text-sm flex flex-row gap-2 text-white font-medium">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" color="#ffff" fill="none">
-                                <path d="M3 12C7.5 12 12 7.5 12 3C12 7.5 16.5 12 21 12C16.5 12 12 16.5 12 21C12 16.5 7.5 12 3 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                                <path d="M2 19.5C2.83333 19.5 4.5 17.8333 4.5 17C4.5 17.8333 6.16667 19.5 7 19.5C6.16667 19.5 4.5 21.1667 4.5 22C4.5 21.1667 2.83333 19.5 2 19.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                                <path d="M16 5C17 5 19 3 19 2C19 3 21 5 22 5C21 5 19 7 19 8C19 7 17 5 16 5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
-                            </svg>
-                            AI Tools
-                        </h2>
-                        <!--Inputs-->
-                        <div class="bg-gray-100 rounded-md w-95">
-                            <input type="text">
-                            Powered by AI. Paste a link or ask anything ✨
-                        </div>
-                    </div>
+            <div class="bg-white w-full p-4">
+                <h2 class="text-xl font-bold mb-2">Generative AI</h2>
+                <!--Output text View-->
+                <div class="bg-gray-100 p-2 rounded-md mb-4">text will output here</div>
+                <!--Search input-->
+                <div class="p-1.5 border-gray-300 border flex flex-row justify-between rounded-md">
+                    <input type="text" placeholder="Paste or type anything..." class="resize-none p-1.5 w-full rounded-md focus:outline-none">
+                    <button class="font-semibold">Send to AI</button>
                 </div>
-
+                <!--Status tag-->
+                Powered by AI. Paste a link or ask anything ✨
             </div>
         </div>
     </div>
