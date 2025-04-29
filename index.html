@@ -150,6 +150,11 @@
                         <path d="M12 5.99954H4M8 1.99954V9.99954" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
+
+                <!--Notification component-->
+                <div id="notification" class="fixed bottom-6 right-6 max-w-xs bg-green-500 text-white px-4 py-3 rounded-md shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+                <span id="notificationText">Note saved successfully!</span>
+            </div>
             </div>
         </div>
 
@@ -157,14 +162,14 @@
             <div class="bg-white w-full p-4">
                 <h2 class="text-xl font-bold mb-2">Generative AI</h2>
                 <!--Output text View-->
-                <div class="bg-gray-100 p-2 rounded-md mb-4">text will output here</div>
+                <div class="bg-gray-100 p-2 rounded-md mb-4"></div>
                 <!--Search input-->
                 <div class="p-1.5 border-gray-300 border flex flex-row justify-between rounded-md">
                     <input type="text" placeholder="Paste or type anything..." class="resize-none p-1.5 w-full rounded-md focus:outline-none">
                     <button class="font-semibold">Send to AI</button>
                 </div>
                 <!--Status tag-->
-                Powered by AI. Paste a link or ask anything ✨
+                <h2 class="mt-2.5 text-center">Powered by AI. Paste a link or ask anything ✨</h2>
             </div>
         </div>
     </div>

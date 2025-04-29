@@ -133,174 +133,403 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 //texteditor functionality
-let optionsButtons = document.querySelectorAll(".option-button");
-let advancedOptionButton = document.querySelectorAll(".adv-option-button");
-let fontName = document.getElementById("fontName");
-let fontSizeRef = document.getElementById("fontSize");
-let writingArea = document.getElementById("text-input");
-let linkButton = document.getElementById("createLink");
-let alignButtons = document.querySelectorAll(".align");
-let spacingButtons = document.querySelectorAll(".spacing");
-let formatButtons = document.querySelectorAll(".format");
-let scriptButtons = document.querySelectorAll(".script");
+// let optionsButtons = document.querySelectorAll(".option-button");
+// let advancedOptionButton = document.querySelectorAll(".adv-option-button");
+// let fontName = document.getElementById("fontName");
+// let fontSizeRef = document.getElementById("fontSize");
+// let writingArea = document.getElementById("text-input");
+// let linkButton = document.getElementById("createLink");
+// let alignButtons = document.querySelectorAll(".align");
+// let spacingButtons = document.querySelectorAll(".spacing");
+// let formatButtons = document.querySelectorAll(".format");
+// let scriptButtons = document.querySelectorAll(".script");
 
-//List of fontlist
-let fontList = [
-  "Arial",
-  "Verdana",
-  "Times New Roman",
-  "Garamond",
-  "Georgia",
-  "Courier New",
-  "cursive",
-];
+// //List of fontlist
+// let fontList = [
+//   "Arial",
+//   "Verdana",
+//   "Times New Roman",
+//   "Garamond",
+//   "Georgia",
+//   "Courier New",
+//   "cursive",
+// ];
 
-//Initial Settings
-const initializer = () => {
-  //function calls for highlighting buttons
-  //No highlights for link, unlink,lists, undo,redo since they are one time operations
-  highlighter(alignButtons, true);
-  highlighter(spacingButtons, true);
-  highlighter(formatButtons, false);
-  highlighter(scriptButtons, true);
+// //Initial Settings
+// const initializer = () => {
+//   //function calls for highlighting buttons
+//   //No highlights for link, unlink,lists, undo,redo since they are one time operations
+//   highlighter(alignButtons, true);
+//   highlighter(spacingButtons, true);
+//   highlighter(formatButtons, false);
+//   highlighter(scriptButtons, true);
 
-  //create options for font names
-  fontList.map((value) => {
-    let option = document.createElement("option");
-    option.value = value;
-    option.innerHTML = value;
-    fontName.appendChild(option);
-  });
+//   //create options for font names
+//   fontList.map((value) => {
+//     let option = document.createElement("option");
+//     option.value = value;
+//     option.innerHTML = value;
+//     fontName.appendChild(option);
+//   });
 
-  //fontSize allows only till 7
-  for (let i = 1; i <= 7; i++) {
-    let option = document.createElement("option");
-    option.value = i;
-    option.innerHTML = i;
-    fontSizeRef.appendChild(option);
-  }
+//   //fontSize allows only till 7
+//   for (let i = 1; i <= 7; i++) {
+//     let option = document.createElement("option");
+//     option.value = i;
+//     option.innerHTML = i;
+//     fontSizeRef.appendChild(option);
+//   }
 
-  //default size
-  fontSizeRef.value = 3;
-};
+//   //default size
+//   fontSizeRef.value = 3;
+// };
 
-//main logic
-const modifyText = (command, defaultUi, value) => {
-  //execCommand executes command on selected text
-  document.execCommand(command, defaultUi, value);
-};
+// //main logic
+// const modifyText = (command, defaultUi, value) => {
+//   //execCommand executes command on selected text
+//   document.execCommand(command, defaultUi, value);
+// };
 
-//For basic operations which don't need value parameter
-optionsButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    modifyText(button.id, false, null);
-  });
-});
+// //For basic operations which don't need value parameter
+// optionsButtons.forEach((button) => {
+//   button.addEventListener("click", () => {
+//     modifyText(button.id, false, null);
+//   });
+// });
 
-//options that require value parameter (e.g colors, fonts)
-advancedOptionButton.forEach((button) => {
-  button.addEventListener("change", () => {
-    modifyText(button.id, false, button.value);
-  });
-});
+// //options that require value parameter (e.g colors, fonts)
+// advancedOptionButton.forEach((button) => {
+//   button.addEventListener("change", () => {
+//     modifyText(button.id, false, button.value);
+//   });
+// });
 
-//link
-linkButton.addEventListener("click", () => {
-  let userLink = prompt("Enter a URL");
-  //if link has http then pass directly else add https
-  if (/http/i.test(userLink)) {
-    modifyText(linkButton.id, false, userLink);
-  } else {
-    userLink = "http://" + userLink;
-    modifyText(linkButton.id, false, userLink);
-  }
-});
+// //link
+// linkButton.addEventListener("click", () => {
+//   let userLink = prompt("Enter a URL");
+//   //if link has http then pass directly else add https
+//   if (/http/i.test(userLink)) {
+//     modifyText(linkButton.id, false, userLink);
+//   } else {
+//     userLink = "http://" + userLink;
+//     modifyText(linkButton.id, false, userLink);
+//   }
+// });
 
-//Highlight clicked button
-const highlighter = (className, needsRemoval) => {
-  className.forEach((button) => {
-    button.addEventListener("click", () => {
-      //needsRemoval = true means only one button should be highlight and other would be normal
-      if (needsRemoval) {
-        let alreadyActive = false;
+// //Highlight clicked button
+// const highlighter = (className, needsRemoval) => {
+//   className.forEach((button) => {
+//     button.addEventListener("click", () => {
+//       //needsRemoval = true means only one button should be highlight and other would be normal
+//       if (needsRemoval) {
+//         let alreadyActive = false;
 
-        //If currently clicked button is already active
-        if (button.classList.contains("active")) {
-          alreadyActive = true;
+//         //If currently clicked button is already active
+//         if (button.classList.contains("active")) {
+//           alreadyActive = true;
+//         }
+
+//         //Remove highlight from other buttons
+//         highlighterRemover(className);
+//         if (!alreadyActive) {
+//           //highlight clicked button
+//           button.classList.add("active");
+//         }
+//       } else {
+//         //if other buttons can be highlighted
+//         button.classList.toggle("active");
+//       }
+//     });
+//   });
+// };
+
+// const highlighterRemover = (className) => {
+//   className.forEach((button) => {
+//     button.classList.remove("active");
+//   });
+// };
+
+// window.onload = initializer();
+
+// // IndexedDB setup using Dexie
+// const db = new Dexie('NotesDB');
+// db.version(1).stores({
+//   notes: 'id,text'
+// });
+
+// const noteEditor = document.getElementById('noteEditor');
+// const publishBtn = document.getElementById('publishBtn');
+// const resetBtn = document.getElementById('resetBtn');
+
+// // Load saved note from IndexedDB
+// window.addEventListener('DOMContentLoaded', async () => {
+//   const note = await db.notes.get(1);
+//   if (note) {
+//     noteEditor.value = note.text;
+//   }
+// });
+
+// // Debounced auto-save to IndexedDB
+// let debounceTimer;
+// noteEditor.addEventListener('input', () => {
+//   clearTimeout(debounceTimer);
+//   debounceTimer = setTimeout(async () => {
+//     await db.notes.put({ id: 1, text: noteEditor.value });
+//   }, 300);
+// });
+
+// // Publish button: confirm save and show toast
+// publishBtn.addEventListener('click', async () => {
+//   await db.notes.put({ id: 1, text: noteEditor.value });
+//   showToast('✅ Note saved successfully!');
+// });
+
+// // Reset button: clear notes and notify
+// resetBtn.addEventListener('click', async (e) => {
+//   e.preventDefault();
+//   noteEditor.value = '';
+//   await db.notes.delete(1);
+//   showToast('🗑 Note cleared.');
+// });
+
+// // Toast Notification Function
+// function showToast(message) {
+//   const toast = document.createElement('div');
+//   toast.textContent = message;
+//   toast.className = 'fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0';
+//   document.body.appendChild(toast);
+//   setTimeout(() => (toast.style.opacity = '1'), 50);
+//   setTimeout(() => {
+//     toast.style.opacity = '0';
+//     setTimeout(() => toast.remove(), 500);
+//   }, 3000);
+// }
+
+
+// //Automation systems functions
+//     // IndexedDB setup
+//     const dbName = 'CitationDB';
+//     const storeName = 'citations';
+
+//     function initDB() {
+//         const request = indexedDB.open(dbName, 1);
+
+//         request.onupgradeneeded = function (event) {
+//             const db = event.target.result;
+//             db.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
+//         };
+//     }
+
+//     async function addCitation(citation) {
+//         const dbReq = indexedDB.open(dbName);
+//         dbReq.onsuccess = () => {
+//             const db = dbReq.result;
+//             const tx = db.transaction(storeName, 'readwrite');
+//             const store = tx.objectStore(storeName);
+//             store.add({ citation });
+//         };
+//     }
+
+//     async function generateHarvardCitation(url) {
+//         try {
+//             const response = await fetch(url);
+//             const html = await response.text();
+//             const parser = new DOMParser();
+//             const doc = parser.parseFromString(html, 'text/html');
+
+//             const title = doc.querySelector('title')?.innerText || 'No title';
+//             const siteName = new URL(url).hostname.replace('www.', '');
+//             const today = new Date();
+//             const accessedDate = `${today.getDate()} ${today.toLocaleString('default', { month: 'long' })} ${today.getFullYear()}`;
+
+//             const citation = `${title}. (${today.getFullYear()}). *${title}*. ${siteName}. Available at: ${url} (Accessed: ${accessedDate}).`;
+//             return citation;
+//         } catch (error) {
+//             return "Error fetching or parsing the URL.";
+//         }
+//     }
+
+//     document.addEventListener('DOMContentLoaded', () => {
+//         initDB();
+
+//         const button = document.querySelector('button');
+//         const input = document.querySelector('input');
+//         const output = document.querySelector('.bg-gray-100');
+
+//         button.addEventListener('click', async () => {
+//             const url = input.value.trim();
+//             if (!url) {
+//                 output.textContent = "Please enter a URL.";
+//                 return;
+//             }
+
+//             output.textContent = "Generating citation...";
+//             const citation = await generateHarvardCitation(url);
+//             output.textContent = citation;
+//             addCitation(citation);
+//         });
+//     });
+
+//re-defined indexDB logic
+        // Initialize IndexedDB
+        let db;
+        const request = indexedDB.open("NotesDB", 1);
+
+        request.onupgradeneeded = (event) => {
+            db = event.target.result;
+            if (!db.objectStoreNames.contains("notes")) {
+                db.createObjectStore("notes", { keyPath: "id", autoIncrement: true });
+            }
+        };
+
+        request.onerror = (event) => {
+            console.error("Database error:", event.target.error);
+            showNotification("Failed to open database.", true);
+        };
+
+        request.onsuccess = (event) => {
+            db = event.target.result;
+            loadNotes();
+        };
+
+        // Show notification
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById("notification");
+            const notificationText = document.getElementById("notificationText");
+
+            notificationText.textContent = message;
+            notification.classList.remove("bg-green-500", "bg-red-500");
+            notification.classList.add(isError ? "bg-red-500" : "bg-green-500");
+            notification.classList.remove("opacity-0", "pointer-events-none");
+            notification.classList.add("opacity-100");
+
+            setTimeout(() => {
+                notification.classList.add("opacity-0", "pointer-events-none");
+                notification.classList.remove("opacity-100");
+            }, 3000);
         }
 
-        //Remove highlight from other buttons
-        highlighterRemover(className);
-        if (!alreadyActive) {
-          //highlight clicked button
-          button.classList.add("active");
+        // Load notes from IndexedDB
+        function loadNotes() {
+            const transaction = db.transaction(["notes"], "readonly");
+            const store = transaction.objectStore("notes");
+            const getAllRequest = store.getAll();
+
+            getAllRequest.onsuccess = () => {
+                const notes = getAllRequest.result;
+                const notesList = document.getElementById("notesList");
+                notesList.innerHTML = "";
+                notes.forEach(note => {
+                    const noteItem = document.createElement("div");
+                    noteItem.classList.add("note-item", "p-4", "border", "border-gray-300", "rounded-md", "mb-2");
+                    noteItem.innerHTML = `
+                        <p>${note.content}</p>
+                        <button class="edit-btn bg-blue-500 text-white p-2 rounded-md mt-2">Edit</button>
+                        <button class="delete-btn bg-red-500 text-white p-2 rounded-md mt-2">Delete</button>
+                    `;
+                    noteItem.querySelector(".edit-btn").addEventListener("click", () => editNote(note.id));
+                    noteItem.querySelector(".delete-btn").addEventListener("click", () => deleteNote(note.id));
+                    notesList.appendChild(noteItem);
+                });
+            };
         }
-      } else {
-        //if other buttons can be highlighted
-        button.classList.toggle("active");
-      }
-    });
-  });
-};
 
-const highlighterRemover = (className) => {
-  className.forEach((button) => {
-    button.classList.remove("active");
-  });
-};
+        // Edit note
+        function editNote(id) {
+            const transaction = db.transaction(["notes"], "readonly");
+            const store = transaction.objectStore("notes");
+            const getRequest = store.get(id);
 
-window.onload = initializer();
+            getRequest.onsuccess = () => {
+                const note = getRequest.result;
+                document.getElementById("noteEditor").value = note.content;
+                document.getElementById("publishBtn").textContent = "Update";
+                document.getElementById("publishBtn").onclick = () => updateNote(id);
+            };
+        }
 
-// IndexedDB setup using Dexie
-const db = new Dexie('NotesDB');
-db.version(1).stores({
-  notes: 'id,text'
-});
+        // Update note
+        function updateNote(id) {
+            const content = document.getElementById("noteEditor").value.trim();
+            if (content === "") {
+                showNotification("Cannot save an empty note.", true);
+                return;
+            }
 
-const noteEditor = document.getElementById('noteEditor');
-const publishBtn = document.getElementById('publishBtn');
-const resetBtn = document.getElementById('resetBtn');
+            const transaction = db.transaction(["notes"], "readwrite");
+            const store = transaction.objectStore("notes");
+            const getRequest = store.get(id);
 
-// Load saved note from IndexedDB
-window.addEventListener('DOMContentLoaded', async () => {
-  const note = await db.notes.get(1);
-  if (note) {
-    noteEditor.value = note.text;
-  }
-});
+            getRequest.onsuccess = () => {
+                const note = getRequest.result;
+                note.content = content;
+                const updateRequest = store.put(note);
 
-// Debounced auto-save to IndexedDB
-let debounceTimer;
-noteEditor.addEventListener('input', () => {
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(async () => {
-    await db.notes.put({ id: 1, text: noteEditor.value });
-  }, 300);
-});
+                updateRequest.onsuccess = () => {
+                    showNotification("Note updated successfully!");
+                    document.getElementById("noteEditor").value = "";
+                    document.getElementById("publishBtn").textContent = "Publish";
+                    document.getElementById("publishBtn").onclick = () => saveNote();
+                    loadNotes();
+                };
 
-// Publish button: confirm save and show toast
-publishBtn.addEventListener('click', async () => {
-  await db.notes.put({ id: 1, text: noteEditor.value });
-  showToast('✅ Note saved successfully!');
-});
+                updateRequest.onerror = () => {
+                    console.error("Failed to update note:", updateRequest.error);
+                    showNotification("Failed to update the note.", true);
+                };
+            };
+        }
 
-// Reset button: clear notes and notify
-resetBtn.addEventListener('click', async (e) => {
-  e.preventDefault();
-  noteEditor.value = '';
-  await db.notes.delete(1);
-  showToast('🗑 Note cleared.');
-});
+        // Save new note
+        function saveNote() {
+            const content = document.getElementById("noteEditor").value.trim();
+            if (content === "") {
+                showNotification("Cannot save an empty note.", true);
+                return;
+            }
 
-// Toast Notification Function
-function showToast(message) {
-  const toast = document.createElement('div');
-  toast.textContent = message;
-  toast.className = 'fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-0';
-  document.body.appendChild(toast);
-  setTimeout(() => (toast.style.opacity = '1'), 50);
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    setTimeout(() => toast.remove(), 500);
-  }, 3000);
-}
+            const transaction = db.transaction(["notes"], "readwrite");
+            const store = transaction.objectStore("notes");
+            const note = { content, timestamp: new Date() };
+            const addRequest = store.add(note);
+
+            addRequest.onsuccess = () => {
+                showNotification("Note saved successfully!");
+                document.getElementById("noteEditor").value = "";
+                loadNotes();
+            };
+
+            addRequest.onerror = () => {
+                console.error("Failed to save note:", addRequest.error);
+                showNotification("Failed to save the note.", true);
+            };
+        }
+
+        // Delete note
+        function deleteNote(id) {
+            const transaction = db.transaction(["notes"], "readwrite");
+            const store = transaction.objectStore("notes");
+            const deleteRequest = store.delete(id);
+
+            deleteRequest.onsuccess = () => {
+                showNotification("Note deleted successfully!");
+                loadNotes();
+            };
+
+            deleteRequest.onerror = () => {
+                console.error("Failed to delete note:", deleteRequest.error);
+                showNotification("Failed to delete the note.", true);
+            };
+        }
+
+        // Reset editor
+        function resetEditor() {
+            document.getElementById("noteEditor").value = "";
+            document.getElementById("publishBtn").textContent = "Publish";
+            document.getElementById("publishBtn").onclick = () => saveNote();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("publishBtn").addEventListener("click", saveNote);
+            document.getElementById("resetBtn").addEventListener("click", resetEditor);
+        });
