@@ -533,3 +533,68 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("publishBtn").addEventListener("click", saveNote);
             document.getElementById("resetBtn").addEventListener("click", resetEditor);
         });
+
+        //modal
+        const modal = document.getElementById("notesModal");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        
+        document.querySelector("button.p-3.rounded-full").addEventListener("click", () => {
+            modal.classList.remove("hidden");
+            loadNotesModal();
+        });
+        
+        closeModalBtn.addEventListener("click", () => {
+            modal.classList.add("hidden");
+        });
+
+        function loadNotesModal() {
+          const transaction = db.transaction(["notes"], "readonly");
+          const store = transaction.objectStore("notes");
+          const getAllRequest = store.getAll();
+      
+          getAllRequest.onsuccess = () => {
+              const notes = getAllRequest.result;
+              const modalList = document.getElementById("modalNotesList");
+              modalList.innerHTML = "";
+      
+              if (notes.length === 0) {
+                  modalList.innerHTML = "<p class='text-gray-500'>No notes found.</p>";
+                  return;
+              }
+      
+              notes.forEach(note => {
+                  const noteBox = document.createElement("div");
+                  noteBox.classList.add("border", "p-3", "rounded-md", "relative", "bg-gray-50");
+      
+                  const content = document.createElement("p");
+                  content.textContent = note.content;
+      
+                  const actions = document.createElement("div");
+                  actions.classList.add("flex", "gap-2", "mt-2");
+      
+                  const editBtn = document.createElement("button");
+                  editBtn.textContent = "Edit";
+                  editBtn.classList.add("border", "text-black", "px-3", "py-1", "rounded-md");
+                  editBtn.addEventListener("click", () => {
+                      editNote(note.id);
+                      modal.classList.add("hidden");
+                  });
+      
+                  const deleteBtn = document.createElement("button");
+                  deleteBtn.textContent = "Delete";
+                  deleteBtn.classList.add("bg-black", "text-white", "px-3", "py-1", "rounded-md");
+                  deleteBtn.addEventListener("click", () => {
+                      deleteNote(note.id);
+                      loadNotesModal(); // Refresh modal list
+                  });
+      
+                  actions.appendChild(editBtn);
+                  actions.appendChild(deleteBtn);
+                  noteBox.appendChild(content);
+                  noteBox.appendChild(actions);
+                  modalList.appendChild(noteBox);
+              });
+          };
+      }
+      
+                
